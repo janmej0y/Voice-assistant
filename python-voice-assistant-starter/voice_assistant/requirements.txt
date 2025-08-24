@@ -1,0 +1,5 @@
+SpeechRecognition
+pyttsx3
+wikipedia
+# PyAudio is platform-specific; install it separately as shown in README
+pip install -r requirements.txt
