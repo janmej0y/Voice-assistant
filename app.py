@@ -1,23 +1,19 @@
-from flask import Flask, render_template, request, session
-from main import process_command
+from flask import Flask, request, jsonify, render_template
+from assistant.skills import handle_command   # your assistant logic
+import os
 
-app = Flask(__name__)
-app.secret_key = "supersecretkey"  # Needed for session storage
+app = Flask(__name__, static_folder="frontend", template_folder="frontend")
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    if "chat" not in session:
-        session["chat"] = []
+    return app.send_static_file("index.html")
 
-    if request.method == "POST":
-        cmd = request.form["command"]
-        response = process_command(cmd)
-
-        # Save user input & assistant response
-        session["chat"].append(("You", cmd))
-        session["chat"].append(("Assistant", response))
-
-    return render_template("index.html", chat=session["chat"])
+@app.route("/ask", methods=["POST"])
+def ask():
+    data = request.json
+    user_input = data.get("message", "")
+    response = handle_command(user_input)
+    return jsonify({"response": response})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
