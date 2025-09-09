@@ -1,6 +1,6 @@
 from assistant.stt_vosk import listen_once_offline
 from assistant.tts import speak
-from assistant.skills import handle_command
+from assistant.skills import process_command
 
 def main():
     speak("Offline mode. I'm listening. Say quit to exit.")
@@ -10,7 +10,7 @@ def main():
             print("No speech detected. Try again.")
             continue
         print(f"You said: {text}")
-        reply = handle_command(text)
+        reply = process_command(text)
         if reply == "__EXIT__":
             speak("Goodbye!")
             break
