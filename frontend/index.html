@@ -2,23 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Voice Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Voice Assistant</title>
   <link rel="stylesheet" href="style.css">
 </head>
-    <body>
-        <div class="container">
-          <h2>My Voice Assistant</h2>
-          <div class="chat-box" id="chatBox">
-            <!-- Messages will be appended here -->
-          </div>
-          <div class="input-box">
-            <input id="message" type="text" placeholder="Type a message..." />
-            <button onclick="askAssistant()">Send</button>
-            <button onclick="startListening()">🎤</button>
-          </div>
-        </div>
-      
-        <script src="script.js"></script>
-      </body>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header>
+      <h1>AI Voice Assistant</h1>
+    </header>
+
+    <!-- Chat Window -->
+    <div id="chat-box" class="chat-box"></div>
+
+    <!-- Input Area -->
+    <div class="input-area">
+      <input type="text" id="command" placeholder="Type a message..." autocomplete="off">
+      <button id="send">Send</button>
+    </div>
+
+    <!-- Floating Mic -->
+    <button id="voice" class="voice-btn">🎤</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
-      

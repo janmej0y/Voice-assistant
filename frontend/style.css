@@ -1,112 +1,125 @@
-/* General page setup */
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
     margin: 0;
     padding: 0;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #f8fafc;
+    height: 100vh;
   }
   
-  /* Chat container */
-  .container {
-    width: 400px;
-    max-height: 600px;
-    background: rgba(15, 23, 42, 0.9);
+  .app-container {
+    width: 100%;
+    max-width: 600px;
+    height: 90vh;
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
-    border-radius: 16px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
   }
   
-  /* Header */
-  .container h2 {
+  header {
     text-align: center;
-    margin: 0;
-    padding: 16px;
-    font-size: 22px;
-    background: #1e293b;
+    padding: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  /* Chat messages area */
+  h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  
   .chat-box {
     flex: 1;
-    padding: 16px;
+    padding: 15px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 12px;
   }
   
-  /* User message */
-  .message.user {
+  /* Chat Bubbles */
+  .chat-box p {
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-radius: 14px;
+    max-width: 75%;
+    word-wrap: break-word;
+  }
+  
+  .chat-box p b {
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+  }
+  
+  .chat-box p:nth-child(odd) {
+    background: #4cafef;
     align-self: flex-end;
-    background: #2563eb;
-    color: white;
-    padding: 10px 14px;
-    border-radius: 14px 14px 0 14px;
-    max-width: 80%;
-    font-size: 14px;
+    margin-left: auto;
   }
   
-  /* Assistant message */
-  .message.assistant {
+  .chat-box p:nth-child(even) {
+    background: #444;
     align-self: flex-start;
-    background: #334155;
-    padding: 10px 14px;
-    border-radius: 14px 14px 14px 0;
-    max-width: 80%;
-    font-size: 14px;
+    margin-right: auto;
   }
   
-  /* Input area */
-  .input-box {
+  /* Input Area */
+  .input-area {
     display: flex;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 12px;
-    background: #1e293b;
+    gap: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  .input-box input {
+  .input-area input {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
+    border-radius: 12px;
     border: none;
-    border-radius: 8px;
     outline: none;
-    font-size: 14px;
-    background: #0f172a;
-    color: #f1f5f9;
+    font-size: 1rem;
   }
   
-  .input-box button {
-    margin-left: 10px;
-    padding: 10px 16px;
+  .input-area button {
+    padding: 12px 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
+    background: #4cafef;
+    color: #fff;
     cursor: pointer;
-    background: #2563eb;
-    color: white;
-    font-weight: bold;
-    transition: 0.2s;
+    transition: background 0.3s;
   }
   
-  .input-box button:hover {
-    background: #1d4ed8;
+  .input-area button:hover {
+    background: #3a8ad9;
   }
   
-  /* Scrollbar style */
-  .chat-box::-webkit-scrollbar {
-    width: 6px;
+  /* Floating Voice Button */
+  .voice-btn {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: #ff4f4f;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease-in-out;
   }
   
-  .chat-box::-webkit-scrollbar-thumb {
-    background: rgba(100, 116, 139, 0.6);
-    border-radius: 4px;
+  .voice-btn:hover {
+    transform: scale(1.1);
+    background: #e64444;
   }
   

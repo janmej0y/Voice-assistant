@@ -25,12 +25,12 @@ button.addEventListener("click", async () => {
     const data = await res.json();
     appendMessage("Assistant", data.response);
 
-    // Make assistant talk back
+    // Assistant voice reply
     const utter = new SpeechSynthesisUtterance(data.response);
     speechSynthesis.speak(utter);
 });
 
-// Voice input
+// 🎤 Voice input
 voiceButton.addEventListener("click", () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "en-US";
@@ -39,6 +39,6 @@ voiceButton.addEventListener("click", () => {
     recognition.onresult = (event) => {
         const spokenText = event.results[0][0].transcript;
         input.value = spokenText;
-        button.click(); // Send automatically
+        button.click();
     };
 });
