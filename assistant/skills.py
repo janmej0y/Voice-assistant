@@ -8,8 +8,8 @@ import pyjokes
 import requests
 import random
 
-# Replace with your OpenWeatherMap API key
-WEATHER_API_KEY = "a865200b52fe478ab6752909252408"
+WEATHER_API_KEY = os.getenv("a865200b52fe478ab6752909252408")
+
 
 def get_weather(city: str) -> str:
     try:
