@@ -1,19 +1,18 @@
-from flask import Flask, request, jsonify, render_template
-from assistant.skills import handle_command   # your assistant logic
-import os
+from flask import Flask, render_template, request, jsonify
+from assistant.skills import process_command  # Import your assistant logic
 
-app = Flask(__name__, static_folder="frontend", template_folder="frontend")
+app = Flask(__name__)
 
 @app.route("/")
-def index():
-    return app.send_static_file("index.html")
+def home():
+    return render_template("index.html")
 
 @app.route("/ask", methods=["POST"])
 def ask():
-    data = request.json
-    user_input = data.get("message", "")
-    response = handle_command(user_input)
+    data = request.get_json()
+    user_cmd = data.get("command", "")
+    response = process_command(user_cmd)
     return jsonify({"response": response})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
