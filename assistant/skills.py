@@ -3,25 +3,19 @@ import webbrowser
 import wikipedia
 import os
 import subprocess
+import random
 import platform
 import pyjokes
 import requests
-import random
+import webbrowser
+from .websites import websites
 
-WEATHER_API_KEY = os.getenv("a865200b52fe478ab6752909252408")
-
-
-def get_weather(city: str) -> str:
-    try:
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric"
-        response = requests.get(url).json()
-        if response["cod"] != 200:
-            return "Sorry, I couldn't find that city."
-        temp = response["main"]["temp"]
-        condition = response["weather"][0]["description"]
-        return f"The weather in {city} is {condition} with {temp}°C."
-    except Exception:
-        return "Sorry, I couldn't fetch the weather right now."
+def open_website(command: str):
+    for key, url in websites.items():
+        if key in command.lower():
+            webbrowser.open(url)
+            return f"Opening {key}"
+    return "Sorry, I don't know that website yet."
 
 def process_command(cmd: str) -> str:
     text = cmd.lower()
@@ -55,13 +49,7 @@ def process_command(cmd: str) -> str:
         except Exception:
             return "Sorry, I could not fetch information from Wikipedia."
 
-    # --- Weather ---
-    elif "weather" in text:
-        city = text.replace("weather in", "").replace("weather", "").strip()
-        if city:
-            return get_weather(city)
-        else:
-            return "Please tell me a city name for weather."
+    
 
     # --- Jokes ---
     elif "joke" in text:

@@ -2,6 +2,15 @@ from assistant.stt import listen_once
 from assistant.tts import speak
 from assistant.skills import process_command
 
+from assistant.skills import open_website
+
+def process_command(command: str):
+    if "open" in command.lower():
+        return open_website(command)
+    else:
+        return "I can’t handle that yet."
+
+
 def main():
     speak("Hello! I'm ready. Say something after the beep. Say quit to exit.")
     while True:
