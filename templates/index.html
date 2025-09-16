@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Voice Assistant</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>AI Voice Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>AI Voice Assistant</h1>
+    <h1>AI Voice Assistant</h1>
+    <div id="chat-box">
+        {% for sender, message in chat %}
+            <p><strong>{{ sender }}:</strong> {{ message|safe }}</p>
+        {% endfor %}
+    </div>
 
-  <div id="chat-box" style="border:1px solid #ccc; padding:10px; height:300px; overflow-y:auto;"></div>
+    <form id="chat-form" method="post">
+        <input type="text" id="command" name="command" placeholder="Type a message...">
+        <button type="submit">Send</button>
+        <button type="button" id="mic-btn">🎤</button>
+    </form>
 
-  <form id="chat-form">
-    <input type="text" id="command" placeholder="Type a command..." required>
-    <button type="submit">Send</button>
-  </form>
-
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
