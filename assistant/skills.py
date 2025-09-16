@@ -7,21 +7,6 @@ import random
 import platform
 import pyjokes
 import requests
-import webbrowser
-from .websites import websites
-
-from .websites import websites
-
-def open_website(command: str):
-    for key, url in websites.items():
-        if key in command.lower():
-            return {
-                "action": "open_url",
-                "url": url,
-                "message": f"Opening {key}"
-            }
-    return {"action": "reply", "message": "Sorry, I don't know that website yet."}
-
 
 
 def process_command(cmd: str) -> str:
@@ -56,8 +41,6 @@ def process_command(cmd: str) -> str:
         except Exception:
             return "Sorry, I could not fetch information from Wikipedia."
 
-    
-
     # --- Jokes ---
     elif "joke" in text:
         return pyjokes.get_joke()
@@ -73,7 +56,7 @@ def process_command(cmd: str) -> str:
 
     # --- Music Player ---
     elif "play music" in text:
-        music_dir = "C:\\Users\\Public\\Music"  # Change to your music folder
+        music_dir = "C:\\Users\\Public\\Music"  # change if needed
         try:
             songs = os.listdir(music_dir)
             if songs:
@@ -162,33 +145,43 @@ def process_command(cmd: str) -> str:
     elif "open youtube" in text:
         webbrowser.open("https://www.youtube.com")
         return "Opening YouTube."
+
     elif "open facebook" in text:
         webbrowser.open("https://www.facebook.com")
         return "Opening Facebook."
+
     elif "open instagram" in text:
         webbrowser.open("https://www.instagram.com")
         return "Opening Instagram."
+
     elif "open twitter" in text or "open x" in text:
         webbrowser.open("https://twitter.com")
         return "Opening Twitter."
+
     elif "open whatsapp" in text:
         webbrowser.open("https://web.whatsapp.com")
         return "Opening WhatsApp Web."
+
     elif "open linkedin" in text:
         webbrowser.open("https://www.linkedin.com")
         return "Opening LinkedIn."
+
     elif "open reddit" in text:
         webbrowser.open("https://www.reddit.com")
         return "Opening Reddit."
+
     elif "open telegram" in text:
         webbrowser.open("https://web.telegram.org")
         return "Opening Telegram."
+
     elif "open snapchat" in text:
         webbrowser.open("https://www.snapchat.com")
         return "Opening Snapchat."
+
     elif "open pinterest" in text:
         webbrowser.open("https://www.pinterest.com")
         return "Opening Pinterest."
+
     elif "open github" in text:
         webbrowser.open("https://github.com")
         return "Opening GitHub."
@@ -205,5 +198,7 @@ def process_command(cmd: str) -> str:
     # --- Fallback ---
     else:
         return f"You said: {cmd}. I don't know that command yet."
-# Alias so main.py works
+
+
+# Alias for backward compatibility
 handle_command = process_command

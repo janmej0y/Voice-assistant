@@ -2,14 +2,6 @@ from assistant.stt import listen_once
 from assistant.tts import speak
 from assistant.skills import process_command
 
-from assistant.skills import open_website
-
-def process_command(command: str):
-    if "open" in command.lower():
-        return open_website(command)
-    else:
-        return "I can’t handle that yet."
-
 
 def main():
     speak("Hello! I'm ready. Say something after the beep. Say quit to exit.")
@@ -28,10 +20,19 @@ def main():
 
         print(f"You said: {text}")
         reply = process_command(text)
-        if reply == "__EXIT__":
+
+        # Handle quit/exit
+        if text.lower() in ["quit", "exit", "stop", "bye"]:
             speak("Goodbye!")
             break
-        speak(reply)
+
+        # If skills.py returned a string
+        if isinstance(reply, str):
+            speak(reply)
+        else:
+            # In case process_command returned dict (e.g., open_url)
+            if "message" in reply:
+                speak(reply["message"])
 
 if __name__ == "__main__":
     main()
