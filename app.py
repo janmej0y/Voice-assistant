@@ -1,11 +1,7 @@
 from flask import Flask, render_template, request, jsonify
-from assistant.skills import process_command  # Import your assistant logic
-
-from flask import Flask, render_template, request, jsonify, session
 from assistant.skills import open_website
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
 
 @app.route("/")
 def index():
@@ -16,7 +12,7 @@ def command():
     data = request.get_json()
     cmd = data.get("command", "")
 
-    response = open_website(cmd)  # response is now a dict
+    response = open_website(cmd)
     return jsonify(response)
 
 if __name__ == "__main__":

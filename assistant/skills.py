@@ -15,8 +15,13 @@ from .websites import websites
 def open_website(command: str):
     for key, url in websites.items():
         if key in command.lower():
-            return {"action": "open_url", "url": url, "message": f"Opening {key}"}
+            return {
+                "action": "open_url",
+                "url": url,
+                "message": f"Opening {key}"
+            }
     return {"action": "reply", "message": "Sorry, I don't know that website yet."}
+
 
 
 def process_command(cmd: str) -> str:
