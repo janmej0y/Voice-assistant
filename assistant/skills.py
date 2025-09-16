@@ -10,12 +10,14 @@ import requests
 import webbrowser
 from .websites import websites
 
+from .websites import websites
+
 def open_website(command: str):
     for key, url in websites.items():
         if key in command.lower():
-            webbrowser.open(url)
-            return f"Opening {key}"
-    return "Sorry, I don't know that website yet."
+            return {"action": "open_url", "url": url, "message": f"Opening {key}"}
+    return {"action": "reply", "message": "Sorry, I don't know that website yet."}
+
 
 def process_command(cmd: str) -> str:
     text = cmd.lower()

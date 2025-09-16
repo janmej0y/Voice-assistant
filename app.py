@@ -1,18 +1,23 @@
 from flask import Flask, render_template, request, jsonify
 from assistant.skills import process_command  # Import your assistant logic
 
+from flask import Flask, render_template, request, jsonify, session
+from assistant.skills import open_website
+
 app = Flask(__name__)
+app.secret_key = "supersecretkey"
 
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
 
-@app.route("/ask", methods=["POST"])
-def ask():
+@app.route("/command", methods=["POST"])
+def command():
     data = request.get_json()
-    user_cmd = data.get("command", "")
-    response = process_command(user_cmd)
-    return jsonify({"response": response})
+    cmd = data.get("command", "")
+
+    response = open_website(cmd)  # response is now a dict
+    return jsonify(response)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(debug=True)
